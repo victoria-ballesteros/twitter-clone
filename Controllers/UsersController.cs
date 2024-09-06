@@ -21,6 +21,20 @@ public class UsersController : Controller
     public async Task<IActionResult> Index(bool buscado, string _username_buscado)
     {
         // Inicializar la variable global ViewBag con toda la información del usuario
+
+        // Últimos usuarios
+
+        var latestUsersResponse = await _supabaseClient
+            .From<UsersModel>()
+            .Select("*")
+            .Order(u => u.User_created_at, Supabase.Postgrest.Constants.Ordering.Descending)
+            .Limit(4)
+            .Get();
+
+        var latestUsers = latestUsersResponse.Models;
+
+        ViewBag.LatestUsers = latestUsers;
+        
         string? username;
         bool flag = false;
 
