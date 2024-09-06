@@ -1,0 +1,426 @@
+@{
+    var thisUser = Context.Request.Cookies["UserName"];
+    int cont = 0;
+    int likesCont = 0;
+}
+
+<div class="h-full p-4 bg-twitter-mutedBackground"> 
+    <!-- Sección de los datos personales del usuario -->
+    <section class="m-4">
+        <div class="mb-4 pb-4 border-b">
+            <p class="text-twitter-textPrimary font-bold text-lg">@ViewBag.UserName</p>
+        </div>
+        <div class="relative mb-20">
+            <!-- Banner -->
+            <div class="w-full">
+                <img src="@Url.Content(ViewBag.BannerPicture)" class="w-full h-40 object-cover">
+            </div>
+            <!-- Profile picture -->
+            <img src="@Url.Content(ViewBag.PicturePath)" class="w-20 h-20 rounded-full object-cover m-4 absolute top-30 z-20 transform -translate-y-1/2">
+        </div>
+        <div class="mb-2">
+            <div class="flex justify-between">
+                <!-- Username -->
+                <p class="text-twitter-textPrimary font-bold text-2xl mb-2">@ViewBag.UserFirstName</p>
+                <div class="relative inline-block text-left">
+                    <!-- Botón que despliega el menú -->
+                    @if(thisUser == ViewBag.UserName)
+                    {
+                        <button id="dropdownButton" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-md px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+                            Edit profile
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    }
+                    else
+                    {
+                        @if(ViewBag.Followed == 0)
+                        {
+                            <button id="follow-button" class="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-twitter-primary hover:bg-blue-700" onclick="toggleFollow('@ViewBag.id')">
+                                Follow
+                            </button>
+                        }
+                        else
+                        {
+                            <button id="follow-button" class="flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-full text-white bg-gray-400 hover:bg-blue-700" onclick="toggleFollow('@ViewBag.id')">
+                                Followed
+                            </button>
+                        }
+                    }
+                    <!-- Menú desplegable -->
+                    <div id="dropdownMenu" class="hidden origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+                            <!-- Profile Pictures Button -->
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="openModalProfile">New Profile Picture</a>
+                            <form asp-action="DeletePicture" asp-controller="Users" asp-route-id="1" method="post" class="block">
+                                <input name="index" value="1" class="hidden">
+                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="deleteProfilePicture">
+                                    Delete Profile Picture
+                                </button>
+                            </form> 
+
+                            <!-- Banner Pictures Button -->
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="openModalBanner">New Banner Picture</a>
+                            <form asp-action="DeletePicture" asp-controller="Users" asp-route-id="2" method="post" class="block">
+                                <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="deleteProfilePicture">
+                                    Delete Banner Picture
+                                </button>
+                            </form>
+
+                            <!-- Description Button -->                            
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" id="editProfileOption">Edit profile description</a>
+                        </div>
+                    </div>
+
+                    <!-- Modal oculto para modificar descripción -->
+                    <div id="modal" class="hidden fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
+                        <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+                            <h2 class="text-xl mb-4">Edit Profile Description</h2>
+                            <!-- Formulario con ASP.NET MVC -->
+                            <form asp-action="ModifyDescription" asp-controller="Users" method="post">
+                                <textarea id="userInput" name="description" class="w-full p-2 border border-gray-300 rounded-md" rows="5" placeholder="@ViewBag.UserDescription"></textarea>
+                                <div class="mt-4 flex justify-end">
+                                    <button type="button" id="closeModal" class="bg-red-500 hover:bg-red-700 text-white py-2 px-4 rounded-md">Cancelar</button>
+                                    <button type="submit" class="ml-2 bg-twitter-primary hover:bg-blue-700 text-white py-2 px-4 rounded-md">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Modal oculto para subir imagen de perfil -->
+                    <div id="uploadModalProfile" class="fixed inset-0 hidden bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+                        <div class="bg-white rounded-lg p-6 w-1/3">
+                            <h2 class="text-xl mb-4">Upload a New Profile Picture</h2>
+                            <form asp-action="UploadPicture" asp-controller="Users" asp-route-id="1" method="post" enctype="multipart/form-data">
+                                <input type="text" name="profilePicture" placeholder="1" class="hidden">
+                                <input type="file" name="profilePicture" accept="image/*" class="block w-full mb-4">
+                                <button type="submit" class="bg-twitter-primary text-white px-4 py-2 rounded">Upload</button>
+                                <button type="button" id="closeModalImage" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Modal oculto para subir imagen de banner -->
+                    <div id="uploadModalBanner" class="fixed inset-0 hidden bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+                        <div class="bg-white rounded-lg p-6 w-1/3">
+                            <h2 class="text-xl mb-4">Upload a New Banner Picture</h2>
+                            <form asp-action="UploadPicture" asp-controller="Users" method="post" enctype="multipart/form-data">
+                                <input type="file" name="profilePicture" accept="image/*" class="block w-full mb-4">
+                                <input type="text" name="profilePicture" placeholder="2" class="hidden">
+                                <button type="submit" class="bg-twitter-primary text-white px-4 py-2 rounded">Upload</button>
+                                <button type="button" id="closeModalImage" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            @if(ViewBag.Description != null)
+            {
+                <p class="mb-4 text-sm italic">@ViewBag.Description</p>
+            }
+            else 
+            {
+                <p class="mb-4 text-lg italic">This user has no available description.</p>
+            }
+            <div class="flex gap-6">
+                <p class="text-sm">Followers @ViewBag.Followers</p>
+                <p class="text-sm">Followings @ViewBag.Followings</p>
+            </div>
+            <p class="font-bold text-sm">Joined in @ViewBag.FormattedDate</p>
+        </div>
+    </section>
+
+    <!-- Sección de Tweets -->
+
+    <section class="mt-6">
+        <div class="flex w-full justify-evenly gap-4 mb-2">
+            <button id="button1" class="flex-grow button px-4 py-2 text-twitter-textPrimary border-b-2 focus:border-b-twitter-primary">Tweets</button>
+            <button id="button2" class="flex-grow button px-4 py-2 text-twitter-textPrimary border-b-2 focus:border-b-twitter-primary">Retweets</button>
+        </div>
+        <div>
+            <div id="content" class="p-4">
+                <div id="div1" class="visible p-4">
+
+                    <!-- Tweets originales -->
+                    <ul>
+                        @foreach (var tweet in ViewBag.TweetsOriginales)
+                        {
+                        <li class="flex gap-2 mb-4 p-4 border border-gray-300 rounded-xl bg-white shadow-md">
+                            <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover rounded-full">
+                            <div>
+                                <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                                <p>@tweet.Tweet_content</p>
+                                <div class="mt-3">
+                                    <div class="flex justify-center mb-2">
+                                        @if (tweet.Tweet_picture_path != null)
+                                        {
+                                            <img src="@Url.Content(tweet.Tweet_picture_path)" class="h-120">
+                                        }
+                                    </div>
+                                    <div class="flex items-center gap-1">
+                                        <p id="likeCount-@tweet.Tweet_id">@tweet.Tweet_likes_quantity</p>
+                                        <button id="likeButton-@tweet.Tweet_id" class="flex gap-4" data-tweet-id="@tweet.Tweet_id">
+                                            <img src="@Url.Content(ViewBag._like[@ViewBag.LikesCont++] == 1 ?  "/assets/HeartFull.svg" : "/assets/Heart.svg")" class="h-5 w-auto like-icon" alt="Like" />
+                                        </button>
+                                        <button id="reButton-@tweet.Tweet_id" class="flex gap-4" data-tweet-id="@tweet.Tweet_id">
+                                            <img src="~/assets/Retweet.svg" class="h-5 w-auto re-icon" alt="Like" />
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        }
+                    </ul>
+                </div>
+
+                <div id="div2" class="hidden p-4">
+
+                    <!-- Retweets -->
+                    <ul>
+                        @foreach (var tweet in ViewBag.Retweets)
+                        {
+                            <li class="flex gap-2 mb-4 p-4 border border-gray-300 rounded-xl bg-white shadow-md">
+                                <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover">
+                                <div>
+                                    <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                                    <p>@tweet.Tweet_content</p>
+
+                                    <div class="flex gap-2 p-4 m-2 border border-gray-300 rounded-xl">
+                                        <img src="@Url.Content(ViewBag.RetweetsOriginalesUsers[cont].User_profile_picture_path)" class="h-10 w-10 object-cover rounded-full">
+                                        <div>
+                                            <p class="font-bold">@ViewBag.RetweetsOriginalesUsers[cont].User_first_name @ViewBag.RetweetsOriginalesUsers[cont].User_username @ViewBag.RetweetsOriginales[cont].Tweet_created_at.ToString("dd MMM")</p>
+                                            <p>@ViewBag.RetweetsOriginales[cont].Tweet_content</p>
+                                            
+                                            @if (ViewBag.RetweetsOriginales[cont].Tweet_picture_path != null)
+                                            {
+                                                <div class="mb-2 mt-4">
+                                                    <img src="@Url.Content(ViewBag.RetweetsOriginales[cont].Tweet_picture_path)" class="h-60 w-full object-cover">
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-3">
+                                        <div class="flex items-center gap-1">
+                                            <p id="likeCount-@tweet.Tweet_id">@tweet.Tweet_likes_quantity</p>
+                                            <button id="likeButton-@tweet.Tweet_id" class="flex gap-4" data-tweet-id="@tweet.Tweet_id">
+                                                <img src="@Url.Content(ViewBag._like[likesCont] == 1 ?  "/assets/HeartFull.svg" : "/assets/Heart.svg")" class="h-5 w-auto like-icon" alt="Like" />
+                                            </button>
+                                            <button id="reButton-@tweet.Tweet_id" class="flex gap-4" data-tweet-id="@tweet.Tweet_id">
+                                                <img src="~/assets/Retweet.svg" class="h-5 w-auto re-icon" alt="Retweet" />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            cont++;
+                            likesCont++;
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Likes script -->
+<script>
+    document.querySelectorAll('button[id^="likeButton-"]').forEach(button => {
+        button.addEventListener('click', async function () {
+            const tweetId = this.getAttribute('data-tweet-id');
+            const likeCountElement = document.getElementById(`likeCount-${tweetId}`);
+            const likeIcon = this.querySelector('.like-icon');
+            const url = '@Url.Action("Like", "Home")';
+            console.log(tweetId);
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ tweetId: tweetId })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Actualiza el contador de likes
+                    likeCountElement.textContent = data.newLikeCount;
+
+                    // Cambia el ícono dependiendo del estado actual
+                    if (likeIcon.src.includes('HeartFull.svg')) {
+                        likeIcon.src = '@Url.Content("~/assets/Heart.svg")'; // Cambiar a ícono vacío
+                    } else {
+                        likeIcon.src = '@Url.Content("~/assets/HeartFull.svg")'; // Cambiar a ícono lleno
+                    }
+                } else {
+                    console.error('Error al dar like');
+                }
+            } catch (error) {
+                console.error('Error de red:', error);
+            }
+        });
+    });
+
+    // Mostrar/ocultar el menú desplegable
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const modal = document.getElementById('modal');
+    const editProfileOption = document.getElementById('editProfileOption');
+    const closeModal = document.getElementById('closeModal');
+
+    // Obtener referencias a los botones y divs
+    const button1 = document.getElementById('button1');
+    const button2 = document.getElementById('button2');
+    const div1 = document.getElementById('div1');
+    const div2 = document.getElementById('div2');
+
+    // Función para mostrar el div 1 y ocultar el div 2
+    function showDiv1() {
+        div1.classList.remove('hidden');
+        div1.classList.add('visible');
+        div2.classList.remove('visible');
+        div2.classList.add('hidden');
+    }
+
+    // Función para mostrar el div 2 y ocultar el div 1
+    function showDiv2() {
+        div2.classList.remove('hidden');
+        div2.classList.add('visible');
+        div1.classList.remove('visible');
+        div1.classList.add('hidden');
+    }
+
+    // Asignar eventos a los botones
+    button1.addEventListener('click', showDiv1);
+    button2.addEventListener('click', showDiv2);
+
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    // Mostrar el modal cuando se selecciona "Edit Profile Description"
+    editProfileOption.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal.classList.remove('hidden'); // Muestra el modal
+        dropdownMenu.classList.add('hidden'); // Oculta el menú desplegable
+    });
+    // Cerrar el modal
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden'); // Oculta el modal
+    });
+
+    // Ocultar el menú si se hace clic fuera de él
+    document.addEventListener('click', function(event) {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+
+    // Abrir el modal cuando se hace clic en el botón "New Profile Picture"
+    document.getElementById('openModalProfile').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('uploadModalProfile').classList.remove('hidden');
+    });
+
+    document.getElementById('openModalBanner').addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('uploadModalBanner').classList.remove('hidden');
+    });
+
+    // Cerrar el modal cuando se hace clic en "Cancel"
+    document.getElementById('closeModalImage').addEventListener('click', function () {
+        document.getElementById('uploadModalProfile').classList.add('hidden');
+    });
+
+    document.getElementById('closeModalImage').addEventListener('click', function () {
+        document.getElementById('uploadModalBanner').classList.add('hidden');
+    });
+</script>
+
+<!-- Modal oculto para retweet -->
+<div id="retweetModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-md shadow-lg w-1/3">
+        <h2 class="text-lg font-bold mb-4">Add a message to your retweet</h2>
+        <input type="text" id="retweetMessage" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm mb-4" placeholder="Type your message here" />
+        <div class="flex justify-end gap-4">
+            <button id="cancelRetweet" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+            <button id="confirmRetweet" class="px-4 py-2 bg-twitter-primary text-white rounded">Retweet</button>
+        </div>
+    </div>
+</div>
+
+<!-- Retweet script -->
+<script>
+    document.querySelectorAll('button[id^="reButton-"]').forEach(button => {
+        button.addEventListener('click', function () {
+            const tweetId = this.getAttribute('data-tweet-id');
+            document.getElementById('retweetModal').classList.remove('hidden');
+            document.getElementById('confirmRetweet').setAttribute('data-tweet-id', tweetId);
+        });
+    });
+
+    document.getElementById('cancelRetweet').addEventListener('click', function () {
+        document.getElementById('retweetModal').classList.add('hidden');
+    });
+
+    document.getElementById('confirmRetweet').addEventListener('click', async function () {
+        const tweetId = this.getAttribute('data-tweet-id');
+        const message = document.getElementById('retweetMessage').value;
+
+        try {
+            const response = await fetch('/Home/Retweet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ TweetId: tweetId, Content: message })
+            });
+
+            if (response.ok) {
+                document.getElementById('retweetModal').classList.add('hidden');
+                alert('Retweet exitoso!');
+            } else {
+                console.error('Error al dar retweet');
+            }
+        } catch (error) {
+            console.error('Error de red:', error);
+        }
+    });
+</script>
+
+<!-- Script para seguir o dejar de seguir -->
+<script>
+    async function toggleFollow(followedUserId) {
+        const followButton = document.getElementById('follow-button');
+
+        // Hacemos una solicitud al servidor para seguir o dejar de seguir al usuario
+        const response = await fetch('/Users/Follow', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ Followed: followedUserId })
+        });
+
+        if (response.ok) {
+            // Actualizamos el texto y el estilo del botón según el estado actual
+            if (followButton.classList.contains('bg-twitter-primary')) {
+                // Si estamos siguiendo al usuario
+                followButton.textContent = 'Followed';
+                followButton.classList.remove('bg-twitter-primary');
+                followButton.classList.add('bg-gray-400');
+            } else {
+                // Si estamos dejando de seguir al usuario
+                followButton.textContent = 'Follow';
+                followButton.classList.remove('bg-gray-400');
+                followButton.classList.add('bg-twitter-primary');
+            }
+        } else {
+            alert('Error al seguir o dejar de seguir al usuario.');
+        }
+    }
+</script>
+

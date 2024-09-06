@@ -1,0 +1,181 @@
+{
+  "Files": [
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/obj/Debug/net8.0/scopedcss/projectbundle/twitter-clone.bundle.scp.css",
+      "PackagePath": "staticwebassets/twitter-clone.bundle.scp.css"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/000b8163-d7c2-4704-94c1-941a32527a13_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/000b8163-d7c2-4704-94c1-941a32527a13_JS5MAvzO_400x400.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/17d17385-fd21-411e-8064-aae5c79fc0e9_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/17d17385-fd21-411e-8064-aae5c79fc0e9_JS5MAvzO_400x400.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/3bd02481-0927-4ff8-9609-9e4a94e3d2da_Photo from 2024-09-05 15-57-00.919872.jpeg",
+      "PackagePath": "staticwebassets/assets/3bd02481-0927-4ff8-9609-9e4a94e3d2da_Photo from 2024-09-05 15-57-00.919872.jpeg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/5c34c649-eb73-458f-8192-15fbae97dfec_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/5c34c649-eb73-458f-8192-15fbae97dfec_JS5MAvzO_400x400.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/87fcd59e-04e8-41cd-964a-da5bbf48c1f5_nuevo-logo-de-f1-2018.jpg",
+      "PackagePath": "staticwebassets/assets/87fcd59e-04e8-41cd-964a-da5bbf48c1f5_nuevo-logo-de-f1-2018.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/DefaultBanner.png",
+      "PackagePath": "staticwebassets/assets/DefaultBanner.png"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Heart.svg",
+      "PackagePath": "staticwebassets/assets/Heart.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/HeartFull.svg",
+      "PackagePath": "staticwebassets/assets/HeartFull.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Home.svg",
+      "PackagePath": "staticwebassets/assets/Home.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Logout.svg",
+      "PackagePath": "staticwebassets/assets/Logout.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Messages.svg",
+      "PackagePath": "staticwebassets/assets/Messages.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Profile.svg",
+      "PackagePath": "staticwebassets/assets/Profile.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Retweet.svg",
+      "PackagePath": "staticwebassets/assets/Retweet.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Search.svg",
+      "PackagePath": "staticwebassets/assets/Search.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/be51822f-a73c-44a8-aac1-a15563113465_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/be51822f-a73c-44a8-aac1-a15563113465_JS5MAvzO_400x400.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/ca7616d5-decc-4f33-aae2-b2ac30b755a7_nuevo-logo-de-f1-2018.jpg",
+      "PackagePath": "staticwebassets/assets/ca7616d5-decc-4f33-aae2-b2ac30b755a7_nuevo-logo-de-f1-2018.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/logo.webp",
+      "PackagePath": "staticwebassets/assets/logo.webp"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/profile-picture-1.jpg",
+      "PackagePath": "staticwebassets/assets/profile-picture-1.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/profile-picture-2.webp",
+      "PackagePath": "staticwebassets/assets/profile-picture-2.webp"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/profile-picture-3.jpg",
+      "PackagePath": "staticwebassets/assets/profile-picture-3.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/profile-picture-4.jpg",
+      "PackagePath": "staticwebassets/assets/profile-picture-4.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/profile-picture-5.jpeg",
+      "PackagePath": "staticwebassets/assets/profile-picture-5.jpeg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/stock-profile-picture.webp",
+      "PackagePath": "staticwebassets/assets/stock-profile-picture.webp"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/css/app.css",
+      "PackagePath": "staticwebassets/css/app.css"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/css/site.css",
+      "PackagePath": "staticwebassets/css/site.css"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/favicon.ico",
+      "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/js/site.js",
+      "PackagePath": "staticwebassets/js/site.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/LICENSE.txt"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation/LICENSE.md",
+      "PackagePath": "staticwebassets/lib/jquery-validation/LICENSE.md"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation/dist/additional-methods.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation/dist/additional-methods.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/additional-methods.min.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery-validation/dist/jquery.validate.min.js",
+      "PackagePath": "staticwebassets/lib/jquery-validation/dist/jquery.validate.min.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery/LICENSE.txt",
+      "PackagePath": "staticwebassets/lib/jquery/LICENSE.txt"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery/dist/jquery.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery/dist/jquery.min.js",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/lib/jquery/dist/jquery.min.map",
+      "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.twitter-clone.props",
+      "PackagePath": "build\\twitter-clone.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.twitter-clone.props",
+      "PackagePath": "buildMultiTargeting\\twitter-clone.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.twitter-clone.props",
+      "PackagePath": "buildTransitive\\twitter-clone.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.twitter-clone.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
