@@ -88,8 +88,35 @@
         </div>
 
         <!-- Recomendaciones de usuarios -->
-        <div>
-
+        <div class="ml-4">
+            <div id="latestUsers">
+            <P class="text-xl font-bold mb-4">Latest users</P>
+            @if (ViewBag.LatestUsers != null)
+            {
+                <ul>
+                    @foreach (var user in ViewBag.LatestUsers)
+                    {
+                        if(user.User_username != userName)
+                        {
+                            <li class="flex gap-2 mb-4">
+                                <img src="@Url.Content(user.User_profile_picture_path)" alt="Profile Picture" class="h-8 w-8 rounded-full object-cover">
+                                <form method="post" action="/Users/Index" class="inline">
+                                    <input type="hidden" name="buscado" value="true" />
+                                    <input type="hidden" name="_username_buscado" value="@user.User_username" />
+                                    <button type="submit" class="text-blue-500 hover:underline bg-transparent border-none cursor-pointer">
+                                        @user.User_username
+                                    </button>
+                                </form>
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No users found.</p>
+            }
+            </div>
         </div>
     </footer>
 
