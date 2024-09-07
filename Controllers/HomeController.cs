@@ -23,6 +23,18 @@ public class HomeController : Controller
     // Inicialización de los ViewBags
     public async Task<IActionResult> Index()
     {
+        // Últimos usuarios
+        var latestUsersResponse = await _supabaseClient
+            .From<UsersModel>()
+            .Select("*")
+            .Order(u => u.User_created_at, Supabase.Postgrest.Constants.Ordering.Descending)
+            .Limit(4)
+            .Get();
+
+        var latestUsers = latestUsersResponse.Models;
+
+        ViewBag.LatestUsers = latestUsers;
+        
         var username = Request.Cookies["UserName"];
 
         if (username == null)

@@ -92,8 +92,8 @@
                     <div id="uploadModalProfile" class="fixed inset-0 hidden bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
                         <div class="bg-white rounded-lg p-6 w-1/3">
                             <h2 class="text-xl mb-4">Upload a New Profile Picture</h2>
-                            <form asp-action="UploadPicture" asp-controller="Users" asp-route-id="1" method="post" enctype="multipart/form-data">
-                                <input type="text" name="profilePicture" placeholder="1" class="hidden">
+                            <form asp-action="UploadPicture" asp-controller="Users" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="i" value="1"> <!-- Hidden field for userId -->
                                 <input type="file" name="profilePicture" accept="image/*" class="block w-full mb-4">
                                 <button type="submit" class="bg-twitter-primary text-white px-4 py-2 rounded">Upload</button>
                                 <button type="button" id="closeModalImage" class="bg-red-500 text-white px-4 py-2 rounded ml-2">Cancel</button>
