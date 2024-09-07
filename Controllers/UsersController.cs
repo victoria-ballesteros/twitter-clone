@@ -250,7 +250,9 @@ public class UsersController : Controller
                 User_last_name = user.User_last_name,
                 User_username = user.User_username,
                 User_email = user.User_email,
-                User_password_hash = BCrypt.Net.BCrypt.EnhancedHashPassword(user.User_password_hash, 11)
+                User_password_hash = BCrypt.Net.BCrypt.EnhancedHashPassword(user.User_password_hash, 11),
+                User_profile_picture_path = "~/assets/stock-profile-picture.webp",
+                User_banner_picture_path = "~/assets/DefaultBanner.png"
             };
 
             try
