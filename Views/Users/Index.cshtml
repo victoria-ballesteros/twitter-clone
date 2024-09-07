@@ -152,12 +152,15 @@
                             <div class="w-full">
                                 <div class="flex w-full justify-between">
                                     <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
-                                    <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
-                                        <input type="hidden" name="id" value="@tweet.Tweet_id" />
-                                        <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
-                                            <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
-                                        </button>
-                                    </form>
+                                    @if (thisUser == ViewBag.UserName)
+                                    {
+                                        <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
+                                            <input type="hidden" name="id" value="@tweet.Tweet_id" />
+                                            <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
+                                                <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
+                                            </button>
+                                        </form>
+                                    }
                                 </div>
                                 <p>@tweet.Tweet_content</p>
                                 <div class="mt-3">
@@ -194,12 +197,15 @@
                                 <div class="w-full">
                                     <div class="flex w-full justify-between">
                                         <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
-                                        <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
-                                            <input type="hidden" name="id" value="@tweet.Tweet_id" />
-                                            <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
-                                                <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
-                                            </button>
-                                        </form>
+                                        @if (thisUser == ViewBag.UserName)
+                                        {
+                                            <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
+                                                <input type="hidden" name="id" value="@tweet.Tweet_id" />
+                                                <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
+                                                    <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
+                                                </button>
+                                            </form>
+                                        }
                                     </div>
                                     <p>@tweet.Tweet_content</p>
 
