@@ -51,3 +51,5 @@
 /home/victoria/Documents/Prg2-Prtc4/twitter-clone/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /home/victoria/Documents/Prg2-Prtc4/twitter-clone/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.dll
 /home/victoria/Documents/Prg2-Prtc4/twitter-clone/bin/Debug/net8.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/victoria/Documents/Prg2-Prtc4/twitter-clone/obj/Debug/net8.0/twitter-clone.sourcelink.json
+/home/victoria/Documents/Prg2-Prtc4/twitter-clone/bin/Debug/net8.0/libman.json

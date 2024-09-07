@@ -1,0 +1,30 @@
+<div class="max-w-md mx-auto p-4 bg-white rounded-lg shadow-md space-y-4">
+    <!-- User Input -->
+    <p class="font-bold text-xl mb-4">Group chat</p>
+    <div class="flex items-center space-x-2">
+        <label for="userInput" class="text-gray-600 font-medium">User</label>
+        <input type="text" id="userInput" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter username" />
+    </div>
+
+    <!-- Message Input -->
+    <div class="flex items-center space-x-2">
+        <label for="messageInput" class="text-gray-600 font-medium">Message</label>
+        <input type="text" id="messageInput" class="flex-grow px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Type your message" />
+    </div>
+
+    <!-- Send Button -->
+    <div class="text-right">
+        <button id="sendButton" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">Send Message</button>
+    </div>
+
+    <!-- Divider -->
+    <hr class="border-gray-300" />
+
+    <!-- Messages List -->
+    <div>
+        <ul id="messagesList" class="space-y-2 text-gray-700"></ul>
+    </div>
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat.js"></script>

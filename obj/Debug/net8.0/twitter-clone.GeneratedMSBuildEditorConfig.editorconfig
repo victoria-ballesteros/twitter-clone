@@ -34,6 +34,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/victoria/Documents/Prg2-Prtc4/twitter-clone/Views/Users/ChatHub.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcnMvQ2hhdEh1Yi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/victoria/Documents/Prg2-Prtc4/twitter-clone/Views/Users/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcnMvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/victoria/Documents/Prg2-Prtc4/twitter-clone/Views/Users/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcnMvTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/victoria/Documents/Prg2-Prtc4/twitter-clone/Views/Users/Mentions.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlcnMvTWVudGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/victoria/Documents/Prg2-Prtc4/twitter-clone/Views/_ViewImports.cshtml]

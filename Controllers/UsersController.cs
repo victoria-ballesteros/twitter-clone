@@ -2,6 +2,8 @@ using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 using twitter_clone.Models;
 using twitter_clone.Services;
+using System.Net;
+using System.Net.Mail;
 
 public class UsersController : Controller
 {
@@ -34,7 +36,7 @@ public class UsersController : Controller
         var latestUsers = latestUsersResponse.Models;
 
         ViewBag.LatestUsers = latestUsers;
-        
+
         string? username;
         bool flag = false;
 
@@ -539,6 +541,8 @@ public class UsersController : Controller
             return StatusCode(500, "Error al insertar el follow.");
         }
 
+        string? destinatario, name, usuario;
+
         var original = Guid.Parse(input);
         var noOriginal = Guid.Parse(request.Followed);
 
@@ -558,10 +562,16 @@ public class UsersController : Controller
 
         var userFollowed = _userFollowed.Models.FirstOrDefault();
 
+
         if (userFollowed == null)
         {
             return StatusCode(500, "Error al insertar el follow.");
         }
+
+        destinatario = userFollowed.User_email;
+        Console.WriteLine(destinatario);
+        name = userFollowed.User_first_name;
+        usuario = userFollowed.User_username;
 
         var _userFollower = await _supabaseClient
                         .From<UsersModel>()
@@ -633,7 +643,50 @@ public class UsersController : Controller
                                               .Upsert(userFollower);
         }
 
+        // Validar si el email del destinatario es válido
+        if (!IsValidEmail(destinatario))
+        {
+            throw new FormatException("El destinatario no tiene un formato de correo electrónico válido.");
+        }
+
+        const string subject = "Se ha actualizado tu lista de seguidores.";
+        string body = "";
+
+        if(Follow == null)
+        {
+            body = userFollower.User_first_name+" te ha empezado a seguir.";
+        }
+        else
+        {
+            body = userFollower.User_first_name+" ha dejado de seguirte";
+        }
+
+        NotificationsModel model = new()
+        {
+            Notification_user_id = userFollowed.User_id,
+            Notification_content = body,
+            Notification_created_at = DateTimeOffset.Now
+        };
+
+        var resp = await _supabaseClient.From<NotificationsModel>()
+                                        .Insert(model);
+
+        send(destinatario, name, body, subject);
+
         return Ok(Follow == null ? "Followed" : "Unfollowed");
+    }
+
+    private bool IsValidEmail(string email)
+    {
+        try
+        {
+            var addr = new MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     [HttpGet]
@@ -670,4 +723,202 @@ public class UsersController : Controller
     {
         public required string Followed { get; set; }
     }
+
+    public async Task<IActionResult> ChatHub()
+    {
+        // Últimos usuarios
+
+        var latestUsersResponse = await _supabaseClient
+            .From<UsersModel>()
+            .Select("*")
+            .Order(u => u.User_created_at, Supabase.Postgrest.Constants.Ordering.Descending)
+            .Limit(4)
+            .Get();
+
+        var latestUsers = latestUsersResponse.Models;
+
+        ViewBag.LatestUsers = latestUsers;
+
+        // VIEWBAGS
+
+        ViewBag.UsersList = new List<UsersModel>();
+
+        var userId = Guid.Parse(Request.Cookies["UserId"]);
+        ViewBag.userId = userId.ToString();
+        var response = await _supabaseClient
+                            .From<UsersModel>()
+                            .Where(u => u.User_id == userId)
+                            .Get();
+
+        if (response == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var _user = response.Models.FirstOrDefault();
+
+        if (_user == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var follows = await _supabaseClient
+                            .From<FollowsModel>()
+                            .Where(u => u.Follow_followed_id == userId)
+                            .Get();
+        if (follows == null)
+        {
+            return View();
+        }
+
+        var _follows = follows.Models;
+
+        if (_follows == null)
+        {
+            return View();
+        }
+
+        foreach (var item in _follows)
+        {
+            var chat = await _supabaseClient
+                            .From<UsersModel>()
+                            .Where(u => u.User_id == item.Follow_follower_id)
+                            .Get();
+
+            if (chat == null)
+            {
+                return View();
+            }
+
+            var _chat = chat.Models.FirstOrDefault();
+
+            if (_chat == null)
+            {
+                return View();
+            }
+
+            ViewBag.UsersList.Add(_chat);
+        }
+
+        return View();
+    }
+
+    public void send(string destinatario, string name, string mensaje, string titulo)
+    {
+        var fromAddress = new MailAddress("unettwitter@gmail.com", "From Twitter");
+        var toAddress = new MailAddress(destinatario, "To " + name);
+        const string fromPassword = "faonexdljihjdknd";
+        string subject = titulo;
+        string body = mensaje;
+
+
+        // Configuración del cliente SMTP
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+
+        // Crear y enviar el correo
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            Subject = subject,
+            Body = body
+        })
+        {
+            smtp.Send(message);
+        }
+    }
+
+    public class LoadMessagesRequest
+    {
+        public string Me { get; set; }
+        public string Sender { get; set; }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> LoadMessages([FromBody] LoadMessagesRequest request)
+    {
+        Console.WriteLine(request.Me);
+        Console.WriteLine(request.Sender);
+        if (request == null || string.IsNullOrEmpty(request.Me) || string.IsNullOrEmpty(request.Sender))
+        {
+            return StatusCode(500, "Inputs vacíos.");
+        }
+        var _me = Guid.Parse(request.Me);
+        var _sender = Guid.Parse(request.Sender);
+
+        // Mensajes entre los dos usuarios
+        // Mensajes enviados por el usuario _me al usuario _sender
+        var sentMessages = await _supabaseClient
+            .From<MessagesModel>()
+            .Where(u => u.Message_sender_id == _me && u.Message_receiver_id == _sender)
+            .Get();
+
+        // Mensajes enviados por el usuario _sender al usuario _me
+        var receivedMessages = await _supabaseClient
+            .From<MessagesModel>()
+            .Where(u => u.Message_sender_id == _sender && u.Message_receiver_id == _me)
+            .Get();
+
+        // Combinar ambos resultados
+        var chatMessages = sentMessages.Models.Concat(receivedMessages.Models)
+            .OrderBy(m => m.Message_created_at)
+            .ToList();
+
+        var messages = chatMessages.Select(item => new
+        {
+            Content = item.Message_content,
+            SentAt = item.Message_created_at
+        }).ToList();
+
+        // Devolver los mensajes en formato JSON
+        return Json(messages);
+    }
+
+    public async Task<IActionResult> Mentions()
+    {
+        // Últimos usuarios
+
+        var latestUsersResponse = await _supabaseClient
+            .From<UsersModel>()
+            .Select("*")
+            .Order(u => u.User_created_at, Supabase.Postgrest.Constants.Ordering.Descending)
+            .Limit(4)
+            .Get();
+
+        var latestUsers = latestUsersResponse.Models;
+
+        ViewBag.LatestUsers = latestUsers;
+        string? input = Request.Cookies["UserId"];
+
+        if (input == null)
+        {
+            return RedirectToAction("Login");
+        }
+
+        var _userId = Guid.Parse(input);
+
+        var user = await _supabaseClient.From<NotificationsModel>()
+                                        .Select("*")
+                                        .Where( u => u.Notification_user_id == _userId)
+                                        .Get();
+
+        var _user = user.Models;
+        ViewBag.Notifications = new List<NotificationsModel>();
+
+        foreach (var item in _user)
+        {
+            ViewBag.Notifications.Add(item);
+            Console.WriteLine(item.Notification_content);
+        }
+
+        return View();
+    }
+
+
 }

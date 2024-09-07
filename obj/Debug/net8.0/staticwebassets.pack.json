@@ -17,12 +17,28 @@
       "PackagePath": "staticwebassets/assets/3bd02481-0927-4ff8-9609-9e4a94e3d2da_Photo from 2024-09-05 15-57-00.919872.jpeg"
     },
     {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/48cdca3e-bea7-400d-b8c8-93072dfa13b2_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/48cdca3e-bea7-400d-b8c8-93072dfa13b2_JS5MAvzO_400x400.jpg"
+    },
+    {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/5c34c649-eb73-458f-8192-15fbae97dfec_JS5MAvzO_400x400.jpg",
       "PackagePath": "staticwebassets/assets/5c34c649-eb73-458f-8192-15fbae97dfec_JS5MAvzO_400x400.jpg"
     },
     {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/5f98f057-380e-48c6-b95d-99ec0d924a5e_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/5f98f057-380e-48c6-b95d-99ec0d924a5e_JS5MAvzO_400x400.jpg"
+    },
+    {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/87fcd59e-04e8-41cd-964a-da5bbf48c1f5_nuevo-logo-de-f1-2018.jpg",
       "PackagePath": "staticwebassets/assets/87fcd59e-04e8-41cd-964a-da5bbf48c1f5_nuevo-logo-de-f1-2018.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/8e366097-88b8-4740-95cf-f2e709f8a72a_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/8e366097-88b8-4740-95cf-f2e709f8a72a_JS5MAvzO_400x400.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/917b2bee-832f-4842-aad4-5feaaf76b344_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/917b2bee-832f-4842-aad4-5feaaf76b344_JS5MAvzO_400x400.jpg"
     },
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/DefaultBanner.png",
@@ -43,6 +59,10 @@
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Logout.svg",
       "PackagePath": "staticwebassets/assets/Logout.svg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Mentions.svg",
+      "PackagePath": "staticwebassets/assets/Mentions.svg"
     },
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/Messages.svg",
@@ -67,6 +87,10 @@
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/ca7616d5-decc-4f33-aae2-b2ac30b755a7_nuevo-logo-de-f1-2018.jpg",
       "PackagePath": "staticwebassets/assets/ca7616d5-decc-4f33-aae2-b2ac30b755a7_nuevo-logo-de-f1-2018.jpg"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/e5d2452d-7ade-47b5-b708-d1dda4cff7af_JS5MAvzO_400x400.jpg",
+      "PackagePath": "staticwebassets/assets/e5d2452d-7ade-47b5-b708-d1dda4cff7af_JS5MAvzO_400x400.jpg"
     },
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/logo.webp",
@@ -107,6 +131,14 @@
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/favicon.ico",
       "PackagePath": "staticwebassets/favicon.ico"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/js/chat.js",
+      "PackagePath": "staticwebassets/js/chat.js"
+    },
+    {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/js/signalr/dist/browser/signalr.js",
+      "PackagePath": "staticwebassets/js/signalr/dist/browser/signalr.js"
     },
     {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/js/site.js",

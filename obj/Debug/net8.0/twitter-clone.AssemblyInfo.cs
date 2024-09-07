@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("twitter-clone")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e77d908b21540cf65320521c64fb2beb6d3ca830")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eefd12b95c81d092194895fbc31cc4cb642e6e97")]
 [assembly: System.Reflection.AssemblyProductAttribute("twitter-clone")]
 [assembly: System.Reflection.AssemblyTitleAttribute("twitter-clone")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

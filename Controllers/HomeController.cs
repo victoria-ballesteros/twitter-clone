@@ -2,6 +2,8 @@ using System.Diagnostics;
 using System.Net.WebSockets;
 using Microsoft.AspNetCore.Mvc;
 using twitter_clone.Models;
+using System.Net;
+using System.Net.Mail;
 
 namespace twitter_clone.Controllers;
 
@@ -211,7 +213,62 @@ public class HomeController : Controller
             return RedirectToAction("Index", "Users");
         }
 
+        var users = await _supabaseClient.From<UsersModel>()
+                                        .Select("*")
+                                        .Get();
+
+        var _users = users.Models;
+
+        if (_users != null)
+        {
+            Console.WriteLine("Encuentra usuarios.");
+        }
+
+        foreach (var item in _users)
+        {
+            if (tweet.Tweet_content.Contains(item.User_username))
+            {
+                Console.WriteLine("Encuentra mención");
+                const string subject = "Tienes una nueva mención.";
+                string body = "El usuario "+Request.Cookies["UserName"]+" te ha mencionado en un tweet.";
+
+                send(item.User_email, item.User_first_name, body, subject);
+                break;
+            }
+        }
+
         return RedirectToAction(nameof(Index));
+    }
+
+    public void send(string destinatario, string name, string mensaje, string titulo)
+    {
+        var fromAddress = new MailAddress("unettwitter@gmail.com", "From Twitter");
+        var toAddress = new MailAddress(destinatario, "To " + name);
+        const string fromPassword = "faonexdljihjdknd";
+        string subject = titulo;
+        string body = mensaje;
+
+
+        // Configuración del cliente SMTP
+        var smtp = new SmtpClient
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            UseDefaultCredentials = false,
+            Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
+        };
+
+        // Crear y enviar el correo
+        using (var message = new MailMessage(fromAddress, toAddress)
+        {
+            Subject = subject,
+            Body = body
+        })
+        {
+            smtp.Send(message);
+        }
     }
 
     // POST: Home/Like

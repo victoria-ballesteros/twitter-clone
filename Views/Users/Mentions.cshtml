@@ -1,0 +1,16 @@
+<section class="flex w-full">
+    <div class="flex w-full">
+        <ul class="flex flex-col gap-2 w-full items-center m-4">
+            @if(ViewBag.Notifications != null)
+            {
+                @foreach(var item in ViewBag.Notifications)
+                {
+                <li class="m-2 p-2 border w-full shadow-md">
+                    <p>@item.Notification_content.</p>
+                    <p class="font-bold">@item.Notification_created_at.ToString("dd MMM")</p>
+                </li>
+                }
+            }
+        </ul>
+    </div>
+</section>
