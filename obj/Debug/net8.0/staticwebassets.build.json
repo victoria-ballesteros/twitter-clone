@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BibrFoCHbtCOlw6U4i3rMW7y5JBuDjSjHGvhKkULzkQ=",
+  "Hash": "0qT/XntKSGMPkVYggsVmt1D48dEoEDdLYY0Qa3K81Xw=",
   "Source": "twitter-clone",
   "BasePath": "_content/twitter-clone",
   "Mode": "Default",
@@ -604,6 +604,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/assets/stock-profile-picture.webp"
+    },
+    {
+      "Identity": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/TrashCan.svg",
+      "SourceId": "twitter-clone",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/",
+      "BasePath": "_content/twitter-clone",
+      "RelativePath": "assets/TrashCan.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/assets/TrashCan.svg"
     },
     {
       "Identity": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/css/app.css",

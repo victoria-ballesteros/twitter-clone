@@ -894,6 +894,7 @@ public class UsersController : Controller
         var latestUsers = latestUsersResponse.Models;
 
         ViewBag.LatestUsers = latestUsers;
+
         string? input = Request.Cookies["UserId"];
 
         if (input == null)
@@ -918,6 +919,20 @@ public class UsersController : Controller
         }
 
         return View();
+    }
+
+    public async Task<IActionResult> DeleteTweet(Guid id)
+    {
+        if (id ==Guid.Empty)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        await _supabaseClient.From<TweetsModel>()
+                            .Where( t => t.Tweet_id == id)
+                            .Delete();
+
+        return RedirectToAction(nameof(Index));
     }
 
 

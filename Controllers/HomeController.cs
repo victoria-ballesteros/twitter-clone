@@ -181,6 +181,12 @@ public class HomeController : Controller
             Console.WriteLine("UserId not available.");
             return RedirectToAction("Index", "Users");
         }
+
+        if(model.Tweet_content == null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+        
         TweetsModel tweet = new()
         {
             Tweet_user_id = Guid.Parse(userId),

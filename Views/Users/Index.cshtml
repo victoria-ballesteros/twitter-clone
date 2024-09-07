@@ -149,8 +149,16 @@
                         {
                         <li class="flex gap-2 mb-4 p-4 border border-gray-300 rounded-xl bg-white shadow-md">
                             <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover rounded-full">
-                            <div>
-                                <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                            <div class="w-full">
+                                <div class="flex w-full justify-between">
+                                    <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                                    <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
+                                        <input type="hidden" name="id" value="@tweet.Tweet_id" />
+                                        <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
+                                            <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
+                                        </button>
+                                    </form>
+                                </div>
                                 <p>@tweet.Tweet_content</p>
                                 <div class="mt-3">
                                     <div class="flex justify-center mb-2">
@@ -183,16 +191,23 @@
                         {
                             <li class="flex gap-2 mb-4 p-4 border border-gray-300 rounded-xl bg-white shadow-md">
                                 <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover">
-                                <div>
-                                    <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                                <div class="w-full">
+                                    <div class="flex w-full justify-between">
+                                        <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName @tweet.Tweet_created_at.ToString("dd MMM")</p>
+                                        <form method="post" asp-controller="Users" asp-action="DeleteTweet" class="flex items-center gap-4">
+                                            <input type="hidden" name="id" value="@tweet.Tweet_id" />
+                                            <button type="submit" class="flex items-center gap-4 bg-transparent border-none cursor-pointer">
+                                                <img src="~/assets/TrashCan.svg" class="h-5 w-auto" alt="Delete Tweet" />
+                                            </button>
+                                        </form>
+                                    </div>
                                     <p>@tweet.Tweet_content</p>
 
                                     <div class="flex gap-2 p-4 m-2 border border-gray-300 rounded-xl">
                                         <img src="@Url.Content(ViewBag.RetweetsOriginalesUsers[cont].User_profile_picture_path)" class="h-10 w-10 object-cover rounded-full">
-                                        <div>
+                                        <div class="w-full">
                                             <p class="font-bold">@ViewBag.RetweetsOriginalesUsers[cont].User_first_name @ViewBag.RetweetsOriginalesUsers[cont].User_username @ViewBag.RetweetsOriginales[cont].Tweet_created_at.ToString("dd MMM")</p>
                                             <p>@ViewBag.RetweetsOriginales[cont].Tweet_content</p>
-                                            
                                             @if (ViewBag.RetweetsOriginales[cont].Tweet_picture_path != null)
                                             {
                                                 <div class="mb-2 mt-4">

@@ -8,32 +8,36 @@
     <!-- Sección para nuevo tweet -->
     <section class="h-auto border shadow-lg bg-twitter-background">
         <div class="m-4 flex flex-col justify-center">
-            <div class="flex gap-2 items-center mb-4">
-                <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover">
-                <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName</p>
+            <div class="flex gap-2 justify-between items-center mb-4">
+                <div class="flex items-center gap-2">
+                   <img src="@Url.Content(ViewBag.PicturePath)" class="h-10 w-10 rounded-full object-cover">
+                    <p class="font-bold">@ViewBag.UserFirstName @ViewBag.UserName</p> 
+                </div>
+                <div>
+                    <div class="text-sm text-gray-500 mt-2">
+                            <span id="charCount">200</span> caracteres restantes
+                    </div>
+                </div>
             </div>
             <form asp-action="Tweet" method="post" enctype="multipart/form-data" class="">
                 <div asp-validation-summary="ModelOnly" class="text-red-500 mb-6"></div>
                  <div>
                     <div class="mb-2">
-                        <input asp-for="Tweet_content" type="text" autocomplete="off" placeholder="How are you feeling today?" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"/>
+                        <input asp-for="Tweet_content" id="tweetInput" type="text" autocomplete="off" placeholder="How are you feeling today?" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"/>
                         <span asp-validation-for="Tweet_content" class="text-red-500 text-sm"></span>
                     </div>
-                    <div class="flex justify-center items-center gap-4">
-                        <div class="flex items-center justify-center w-1/2">
-                            <label class="flex items-center justify-center gap-2 w-full py-2 bg-white text-blue-500 rounded-lg shadow-lg tracking-wide uppercase border border-twitter-primary cursor-pointer hover:bg-twitter-primary hover:text-white transition duration-300 ease-in-out">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                                </svg>
-                                <span class="text-sm">Upload Image</span>
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center px-4 py-1.5">
+                            <label class="flex items-center justify-center gap-2 w-full py-2 bg-transparent text-twitter-primary border-b border-twitter-primary cursor-pointer hover:border-twitter-primary-dark transition duration-300 ease-in-out">
+                                <span class="">Upload Image</span>
                                 <input asp-for="Tweet_image" type="file" name="Tweet_image" accept="image/*" class="hidden">
                             </label>
                         </div>
                         <div class="flex justify-center">
-                            <button type="submit" class="button px-4 py-1.5 text-white bg-twitter-primary rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <button type="submit" class="px-4 py-1.5 text-twitter-primary border-b border-twitter-primary bg-transparent hover:border-twitter-primary-dark hover:text-twitter-primary-dark focus:outline-none transition duration-300 ease-in-out">
                                 Tweet
                             </button>
-                        </div>  
+                        </div>
                     </div>
                     <input asp-for="Tweet_user_id" placeholder="@userId" class="hidden"/>
                     <input asp-for="Tweet_re_id" class="hidden"/>
@@ -43,7 +47,7 @@
     </section>
     <!-- Sección para tweets de personas a las que sigue -->
     <section class="mt-4">
-        <p class="font-bold mb-4">Tweets from people you follow</p>
+        <p class="font-bold mb-4 text-twitter-primary">Tweets from people you follow</p>
         <ul>
             @foreach(var tweet in ViewBag._tweets)
             {
@@ -169,4 +173,17 @@
         }
     });
 
+</script>
+
+<!-- Script para la cuenta de caracteres -->
+<script>
+    const tweetInput = document.getElementById('tweetInput');
+    const charCount = document.getElementById('charCount');
+    const maxChars = 200;
+
+    // Escucha el evento 'input' para detectar cambios en el texto
+    tweetInput.addEventListener('input', function() {
+        const remainingChars = maxChars - tweetInput.value.length;
+        charCount.textContent = remainingChars;
+    });
 </script>

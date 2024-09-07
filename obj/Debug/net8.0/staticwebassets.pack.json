@@ -81,6 +81,10 @@
       "PackagePath": "staticwebassets/assets/Search.svg"
     },
     {
+      "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/TrashCan.svg",
+      "PackagePath": "staticwebassets/assets/TrashCan.svg"
+    },
+    {
       "Id": "/home/victoria/Documents/Prg2-Prtc4/twitter-clone/wwwroot/assets/be51822f-a73c-44a8-aac1-a15563113465_JS5MAvzO_400x400.jpg",
       "PackagePath": "staticwebassets/assets/be51822f-a73c-44a8-aac1-a15563113465_JS5MAvzO_400x400.jpg"
     },
